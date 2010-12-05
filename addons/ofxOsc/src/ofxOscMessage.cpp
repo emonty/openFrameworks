@@ -30,8 +30,11 @@
 #include <iostream>
 #include <assert.h>
 
-ofxOscMessage::ofxOscMessage()
-
+ofxOscMessage::ofxOscMessage() :
+	address(""),
+        args(),
+        remote_host(""),
+        remote_port(0)
 {
 }
 
@@ -56,12 +59,12 @@ get methods
 
 int ofxOscMessage::getNumArgs() const
 {
-	return (int)args.size();
+	return int(args.size());
 }
 
 ofxOscArgType ofxOscMessage::getArgType( int index ) const
 {
-    if ( index >= (int)args.size() )
+    if ( index >= int(args.size()) )
     {
         fprintf(stderr,"ofxOscMessage::getArgType: index %d out of bounds\n", index );
         return OFXOSC_TYPE_INDEXOUTOFBOUNDS;
@@ -72,7 +75,7 @@ ofxOscArgType ofxOscMessage::getArgType( int index ) const
 
 string ofxOscMessage::getArgTypeName( int index ) const
 {
-    if ( index >= (int)args.size() )
+    if ( index >= int(args.size()) )
     {
         fprintf(stderr,"ofxOscMessage::getArgTypeName: index %d out of bounds\n", index );
         return "INDEX OUT OF BOUNDS";
@@ -89,7 +92,7 @@ int32_t ofxOscMessage::getArgAsInt32( int index ) const
 	    if ( getArgType( index ) == OFXOSC_TYPE_FLOAT )
         {
             fprintf(stderr, "ofxOscMessage:getArgAsInt32: warning: converting int32 to float for argument %i\n", index );
-            return ((ofxOscArgFloat*)args[index])->get();
+            return static_cast<ofxOscArgFloat*>(args[index])->get();
         }
         else
         {
@@ -98,7 +101,7 @@ int32_t ofxOscMessage::getArgAsInt32( int index ) const
         }
 	}
 	else
-        return ((ofxOscArgInt32*)args[index])->get();
+        return static_cast<ofxOscArgInt32*>(args[index])->get();
 }
 
 
@@ -109,7 +112,7 @@ float ofxOscMessage::getArgAsFloat( int index ) const
 	    if ( getArgType( index ) == OFXOSC_TYPE_INT32 )
         {
             fprintf(stderr, "ofxOscMessage:getArgAsFloat: warning: converting float to int32 for argument %i\n", index );
-            return ((ofxOscArgInt32*)args[index])->get();
+            return static_cast<ofxOscArgInt32*>(args[index])->get();
         }
         else
         {
@@ -118,7 +121,7 @@ float ofxOscMessage::getArgAsFloat( int index ) const
         }
 	}
 	else
-        return ((ofxOscArgFloat*)args[index])->get();
+        return static_cast<ofxOscArgFloat*>(args[index])->get();
 }
 
 
@@ -129,14 +132,14 @@ string ofxOscMessage::getArgAsString( int index ) const
 	    if ( getArgType( index ) == OFXOSC_TYPE_FLOAT )
         {
             char buf[1024];
-            sprintf(buf,"%f",((ofxOscArgFloat*)args[index])->get() );
+            sprintf(buf,"%f",static_cast<ofxOscArgFloat*>(args[index])->get() );
             fprintf(stderr, "ofxOscMessage:getArgAsString: warning: converting float to string for argument %i\n", index );
             return buf;
         }
 	    else if ( getArgType( index ) == OFXOSC_TYPE_INT32 )
         {
             char buf[1024];
-            sprintf(buf,"%i",((ofxOscArgInt32*)args[index])->get() );
+            sprintf(buf,"%i",static_cast<ofxOscArgInt32*>(args[index])->get() );
             fprintf(stderr, "ofxOscMessage:getArgAsString: warning: converting int32 to string for argument %i\n", index );
             return buf;
         }
@@ -147,7 +150,7 @@ string ofxOscMessage::getArgAsString( int index ) const
         }
 	}
 	else
-        return ((ofxOscArgString*)args[index])->get();
+        return static_cast<ofxOscArgString*>(args[index])->get();
 }
 
 
@@ -191,7 +194,7 @@ ofxOscMessage& ofxOscMessage::copy( const ofxOscMessage& other )
 	remote_port = other.remote_port;
 
 	// copy arguments
-	for ( int i=0; i<(int)other.args.size(); ++i )
+	for ( int i=0; i<int(other.args.size()); ++i )
 	{
 		ofxOscArgType argType = other.getArgType( i );
 		if ( argType == OFXOSC_TYPE_INT32 )

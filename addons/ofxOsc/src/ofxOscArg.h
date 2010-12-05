@@ -78,12 +78,12 @@ typedef long int32_t;
 class ofxOscArgInt32 : public ofxOscArg
 {
 public:
-	ofxOscArgInt32( int32_t _value ) { value = _value; }
+	ofxOscArgInt32( int32_t _value ) : value(_value) { }
 	~ofxOscArgInt32() {};
 
 	/// return the type of this argument
-	ofxOscArgType getType() { return OFXOSC_TYPE_INT32; }
-	string getTypeName() { return "int32"; }
+	ofxOscArgType getType() const { return OFXOSC_TYPE_INT32; }
+	string getTypeName() const { return "int32"; }
 
 	/// return value
 	int32_t get() const { return value; }
@@ -97,12 +97,12 @@ private:
 class ofxOscArgFloat : public ofxOscArg
 {
 public:
-	ofxOscArgFloat( float _value ) { value = _value; }
+	ofxOscArgFloat( float _value ) : value(_value) { }
 	~ofxOscArgFloat() {};
 
 	/// return the type of this argument
-	ofxOscArgType getType() { return OFXOSC_TYPE_FLOAT; }
-	string getTypeName() { return "float"; }
+	ofxOscArgType getType() const { return OFXOSC_TYPE_FLOAT; }
+	string getTypeName() const { return "float"; }
 
 	/// return value
 	float get() const { return value; }
@@ -116,17 +116,17 @@ private:
 class ofxOscArgString : public ofxOscArg
 {
 public:
-	ofxOscArgString( string _value ) { value = _value; }
+	ofxOscArgString( const std::string &_value ) : value(_value) { }
 	~ofxOscArgString() {};
 
 	/// return the type of this argument
-	ofxOscArgType getType() { return OFXOSC_TYPE_STRING; }
-	string getTypeName() { return "string"; }
+	ofxOscArgType getType() const { return OFXOSC_TYPE_STRING; }
+	string getTypeName() const { return "string"; }
 
 	/// return value
 	string get() const { return value; }
 	/// set value
-	void set( const char* _value ) { value = _value; }
+	void set( const std::string &_value ) { value = _value; }
 
 private:
 	std::string value;

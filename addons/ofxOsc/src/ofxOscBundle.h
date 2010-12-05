@@ -37,7 +37,7 @@ class ofxOscBundle
 public:	
 	ofxOscBundle();
 	~ofxOscBundle();
-	ofxOscBundle( const ofxOscBundle& other ) { copy ( other ); }
+	ofxOscBundle( const ofxOscBundle& other ) : messages(), bundles() { copy ( other ); }
 	ofxOscBundle& operator= ( const ofxOscBundle& other ) { return copy( other ); }
 	/// for operator= and copy constructor
 	ofxOscBundle& copy( const ofxOscBundle& other );

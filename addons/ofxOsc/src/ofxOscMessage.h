@@ -41,7 +41,12 @@ class ofxOscMessage
 public:
 	ofxOscMessage();
 	~ofxOscMessage();
-	ofxOscMessage( const ofxOscMessage& other ){ copy ( other ); }
+	ofxOscMessage( const ofxOscMessage& other ) :
+		address(other.address),
+		args(),
+		remote_host(other.remote_host),
+		remote_port(other.remote_port)
+	{ copy ( other ); }
 	ofxOscMessage& operator= ( const ofxOscMessage& other ) { return copy( other ); }
 	/// for operator= and copy constructor
 	ofxOscMessage& copy( const ofxOscMessage& other );

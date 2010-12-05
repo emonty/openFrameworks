@@ -29,7 +29,8 @@
 #include "ofxOscBundle.h"
 
 
-ofxOscBundle::ofxOscBundle()
+ofxOscBundle::ofxOscBundle() :
+	messages(), bundles()
 {
 }
 
@@ -39,11 +40,11 @@ ofxOscBundle::~ofxOscBundle()
 
 ofxOscBundle& ofxOscBundle::copy( const ofxOscBundle& other )
 {
-	for ( int i=0; i<other.bundles.size(); i++ )
+	for ( size_t i=0; i<other.bundles.size(); i++ )
 	{
 		bundles.push_back( other.bundles[i] );
 	}
-	for ( int i=0; i<other.messages.size(); i++ )
+	for ( size_t i=0; i<other.messages.size(); i++ )
 	{
 		messages.push_back( other.messages[i] );
 	}

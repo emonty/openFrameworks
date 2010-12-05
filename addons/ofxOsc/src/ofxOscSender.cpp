@@ -34,9 +34,9 @@
 
 #include <assert.h>
 
-ofxOscSender::ofxOscSender()
+ofxOscSender::ofxOscSender() :
+	socket(NULL)
 {
-	socket = NULL;
 }
 
 ofxOscSender::~ofxOscSender()

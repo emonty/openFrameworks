@@ -103,6 +103,10 @@ private:
 	// ready to be deleted
 	bool socketHasShutdown;
 
+        // Prevent default Copy-CTOR and assignment
+        ofxOscReceiver( const ofxOscReceiver& );
+        ofxOscReceiver& operator=( const ofxOscReceiver& );
+
 };
 
 #endif

@@ -54,7 +54,7 @@ public:
 	ofxOscSender();
 	~ofxOscSender();
 
-	/// send messages to hostname and port
+        /// send messages to hostname and port
 	void setup( std::string hostname, int port );
 
 	/// send the given message
@@ -70,6 +70,10 @@ private:
 	void appendMessage( ofxOscMessage& message, osc::OutboundPacketStream& p );
 
 	UdpTransmitSocket* socket;
+
+        // Prevent default Copy-CTOR and assignment
+        ofxOscSender( const ofxOscSender& );
+        ofxOscSender& operator=( const ofxOscSender& );
 };
 
 #endif

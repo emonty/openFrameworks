@@ -34,9 +34,13 @@
 #include <iostream>
 #include <assert.h>
 
-ofxOscReceiver::ofxOscReceiver()
+ofxOscReceiver::ofxOscReceiver() :
+	messages(),
+        listen_socket(NULL),
+        thread(),
+        mutex(),
+        socketHasShutdown(false)
 {
-	listen_socket = NULL;
 }
 
 void ofxOscReceiver::setup( int listen_port )
@@ -67,7 +71,7 @@ void ofxOscReceiver::setup( int listen_port )
 							   NULL);             // we don't the the thread id
 
 	#else
-	pthread_create( &thread, NULL, &ofxOscReceiver::startThread, (void*)this );
+	pthread_create( &thread, NULL, &ofxOscReceiver::startThread, static_cast<void*>(this) );
 	#endif
 }
 
@@ -116,7 +120,7 @@ void*
 		ofxOscReceiver::startThread( void* receiverInstance )
 {
 	// cast the instance
-	ofxOscReceiver* instance = (ofxOscReceiver*)receiverInstance;
+	ofxOscReceiver* instance = static_cast<ofxOscReceiver*>(receiverInstance);
 	// start the socket listener
 	instance->listen_socket->Run();
 	// socket listener has finished - remember this fact
@@ -183,7 +187,7 @@ bool ofxOscReceiver::hasWaitingMessages()
 	grabMutex();
 
 	// check the length of the queue
-	int queue_length = (int)messages.size();
+	int queue_length = int(messages.size());
 
 	// release the lock
 	releaseMutex();
