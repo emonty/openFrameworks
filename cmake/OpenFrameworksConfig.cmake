@@ -3,7 +3,8 @@ get_filename_component(OPENFRAMEWORKS_CMAKE_DIR_ROOT ${CMAKE_CURRENT_LIST_FILE} 
 get_filename_component(OPENFRAMEWORKS_ROOT "${OPENFRAMEWORKS_CMAKE_DIR_ROOT}/../" ABSOLUTE)
 set(OPENFRAMEWORKS_ADDONS_ROOT "${OPENFRAMEWORKS_ROOT}/addons/")
 
-set(OPENFRAMEWORKS_INCLUDES_SEARCH_PATHS 
+IF(NOT DEFINED DISABLE-INCLUDED-LIBRARIES)
+  set(OPENFRAMEWORKS_INCLUDES_SEARCH_PATHS 
                                  ${OPENFRAMEWORKS_ROOT}/libs/fmodex/include
                                  ${OPENFRAMEWORKS_ROOT}/libs/FreeImage/include
                                  ${OPENFRAMEWORKS_ROOT}/libs/freetype/include
@@ -19,7 +20,7 @@ set(OPENFRAMEWORKS_INCLUDES_SEARCH_PATHS
                                  /usr/include/*
                                  
                                  CACHE STRING "OpenFrameworks includes search path")
-if(APPLE)
+  if(APPLE)
     set(OPENFRAMEWORKS_LIBRARIES_SEARCH_PATHS 
                                      ${OPENFRAMEWORKS_ROOT}/libs/fmodex/lib/osx
                                      ${OPENFRAMEWORKS_ROOT}/libs/FreeImage/lib/osx
@@ -35,15 +36,15 @@ if(APPLE)
                                      ${OPENFRAMEWORKS_ROOT}/libs/videoInput/lib/osx
                                      
                                      CACHE STRING "OpenFrameworks library search paths")
-elseif( "${CMAKE_SYSTEM_NAME}" MATCHES "Linux")
-  execute_process(COMMAND uname -m OUTPUT_VARIABLE ARCH)
-  if ( ${ARCH} MATCHES "x86_64" )
-    set (SUBLIBDIRSUFFIX "linux64")
-  else()
-    set(SUBLIBDIRSUFFIX "linux")
-  endif()
+  elseif( "${CMAKE_SYSTEM_NAME}" MATCHES "Linux")
+    execute_process(COMMAND uname -m OUTPUT_VARIABLE ARCH)
+    if ( ${ARCH} MATCHES "x86_64" )
+      set (SUBLIBDIRSUFFIX "linux64")
+    else()
+      set(SUBLIBDIRSUFFIX "linux")
+    endif()
 
-     set(OPENFRAMEWORKS_LIBRARIES_SEARCH_PATHS 
+    set(OPENFRAMEWORKS_LIBRARIES_SEARCH_PATHS 
                                      ${OPENFRAMEWORKS_ROOT}/libs/fmodex/lib/${SUBLIBDIRSUFFIX}
                                      ${OPENFRAMEWORKS_ROOT}/libs/FreeImage/lib/${SUBLIBDIRSUFFIX}
                                      ${OPENFRAMEWORKS_ROOT}/libs/freetype/lib/${SUBLIBDIRSUFFIX}
@@ -54,6 +55,7 @@ elseif( "${CMAKE_SYSTEM_NAME}" MATCHES "Linux")
                                      ${OPENFRAMEWORKS_ROOT}/libs/poco/lib/${SUBLIBDIRSUFFIX}
                                      ${OPENFRAMEWORKS_ROOT}/libs/rtAudio/lib/${SUBLIBDIRSUFFIX}
                                      CACHE STRING "OpenFrameworks library search paths")
-endif() 
+  endif() 
+ENDIF(NOT DEFINED DISABLE-INCLUDED-LIBRARIES)
 
 

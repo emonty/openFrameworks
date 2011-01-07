@@ -163,7 +163,10 @@ endmacro()
 #######################################################
 #######################################################
 
+
+IF(NOT DEFINED DISABLE-INCLUDED-LIBRARIES)
 of_find_lib_and_include(fmodex "fmod.h")
+ENDIF()
 of_find_lib_and_include(PocoFoundation "Poco/Poco.h")
 of_find_lib_and_include(GLee GLee.h)
 of_find_lib_and_include(RtAudio RtAudio.h)
@@ -173,7 +176,7 @@ of_find_lib_and_include(FreeImage FreeImage.h)
 if ( "${CMAKE_SYSTEM_NAME}" MATCHES "Linux" ) 
   of_find_library(asound)
   of_find_library(raw1394)
-  of_find_lib_and_include(avcodec avcodec.h)
+  of_find_library(avcodec)
   #if ( ${OPENFRAMEWORKS_VIDCAP_METHOD} MATCHES "unicap" )
   #  of_find_pkgconfig_lib(unicap)
   #elseif( ${OPENFRAMEWORKS_VIDCAP_METHOD} MATCHES "gstreamer" )

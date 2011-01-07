@@ -13,7 +13,6 @@ set (OFX_SOURCE_FILES
             graphics/ofTexture.cpp
             graphics/ofTrueTypeFont.cpp
             sound/ofSoundStream.cpp
-            sound/ofSoundPlayer.cpp
             app/ofAppRunner.cpp
             app/ofAppGlutWindow.cpp
             video/ofVideoPlayer.cpp
@@ -45,6 +44,10 @@ set (OFX_SOURCE_FILES
             video/ofQtUtils.h
             video/ofVideoGrabber.h
 )
+IF(NOT DEFINED DISABLE-INCLUDED-LIBRARIES)
+  set (OFX_SOURCE_FILES ${OFX_SOURCE_FILES}
+            sound/ofSoundPlayer.cpp )
+ENDIF()
 if ( "${CMAKE_SYSTEM_NAME}" MATCHES "Linux")
   if(OPENFRAMEWORKS_VIDCAP_METHOD MATCHES "gstreamer")
     set (OFX_SOURCE_FILES ${OFX_SOURCE_FILES}

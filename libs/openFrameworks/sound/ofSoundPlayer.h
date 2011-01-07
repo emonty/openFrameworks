@@ -3,7 +3,7 @@
 
 #include "ofConstants.h"
 
-#ifndef TARGET_OF_IPHONE
+#if !defined(TARGET_OF_IPHONE) && defined(OF_USING_FMODEX)
 extern "C" {
 #include "fmod.h"
 #include "fmod_errors.h"
