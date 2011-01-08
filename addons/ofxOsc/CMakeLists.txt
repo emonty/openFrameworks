@@ -67,7 +67,19 @@ message("_--- ${ADDON_INCLUDES}")
 file( GLOB_RECURSE ADDON_SRC ${ADDON_ROOT}/src/*.cpp)
 #########################################################################
 
+set(OPENFRAMEWORKS_INCLUDES ${OPENFRAMEWORKS_INCLUDES}
+${OPENFRAMEWORKS_ROOT}/libs/openFrameworks
+${OPENFRAMEWORKS_ROOT}/libs/openFrameworks/utils
+${OPENFRAMEWORKS_ROOT}/libs/openFrameworks/events
+${OPENFRAMEWORKS_ROOT}/libs/openFrameworks/graphics
+${OPENFRAMEWORKS_ROOT}/libs/openFrameworks/app
+${OPENFRAMEWORKS_ROOT}/libs/openFrameworks/video
+${OPENFRAMEWORKS_ROOT}/libs/openFrameworks/communication
+${OPENFRAMEWORKS_ROOT}/libs/openFrameworks/sound
+)
+include_directories(${OPENFRAMEWORKS_INCLUDES} ${ADDON_INCLUDES})
+add_library(${ADDON_NAME} SHARED ${ADDON_SRC})
+set_target_properties (${ADDON_NAME} 
+                        PROPERTIES OUTPUT_NAME ${ADDON_NAME} )
+target_link_libraries(${ADDON_NAME} ${ADDON_LIBRARIES})
 
-set(ADDONS_SOURCES ${ADDONS_SOURCES} ${ADDON_SRC})
-set(ADDONS_INCLUDE_DIRS ${ADDONS_INCLUDE_DIRS} ${ADDON_INCLUDES} "${ADDON_ROOT}/src/")
-set(ADDONS_LIBRARIES ${ADDONS_LIBRARIES} ${ADDON_LIBRARIES})

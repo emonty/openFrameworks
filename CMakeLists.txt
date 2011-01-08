@@ -7,9 +7,9 @@ set(OPENFRAMEWORKS_VERSION "0.6")
 include(cmake/OpenFrameworksConfig.cmake)
 include(cmake/OpenFrameworks.cmake)
 
-include(addons/ofxOsc/ofxOsc.cmake)
-
 SUBDIRS(libs/openFrameworks)
+
+SUBDIRS(addons/ofxOsc)
 
 set(VERSION 0.6.0)
 
