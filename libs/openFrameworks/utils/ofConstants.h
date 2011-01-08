@@ -193,7 +193,7 @@
 #define OF_USING_POCO
 
 // comment out this line to disable all fmodex related code
-#define OF_USING_FMODEX
+//#define OF_USING_FMODEX
 
 //we don't want to break old code that uses ofSimpleApp
 //so we forward declare ofBaseApp and make ofSimpleApp mean the same thing
