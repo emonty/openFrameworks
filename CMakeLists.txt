@@ -9,4 +9,8 @@ include(cmake/OpenFrameworks.cmake)
 
 SUBDIRS(libs/openFrameworks)
 
-
+set(CPACK_PACKAGE_VERSION_MAJOR 0)
+set(CPACK_PACKAGE_VERSION_MINOR 6)
+set(CPACK_PACKAGE_VERSION_PATCH 0)
+set(CPACK_SOURCE_GENERATOR TGZ)
+INCLUDE(CPack)
