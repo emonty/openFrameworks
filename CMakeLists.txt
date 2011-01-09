@@ -9,6 +9,7 @@ include(cmake/OpenFrameworks.cmake)
 
 SUBDIRS(libs/openFrameworks)
 
+SUBDIRS(addons/ofx3DModelLoader)
 SUBDIRS(addons/ofxOsc)
 
 set(VERSION 0.6.0)
