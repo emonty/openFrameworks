@@ -33,6 +33,7 @@ ${OPENFRAMEWORKS_ROOT}/libs/openFrameworks/app
 ${OPENFRAMEWORKS_ROOT}/libs/openFrameworks/video
 ${OPENFRAMEWORKS_ROOT}/libs/openFrameworks/communication
 ${OPENFRAMEWORKS_ROOT}/libs/openFrameworks/sound
+${ADDON_ROOT}/libs
 )
 include_directories(${OPENFRAMEWORKS_INCLUDES} ${ADDON_INCLUDES})
 add_library(${ADDON_NAME} SHARED ${ADDON_SRC})

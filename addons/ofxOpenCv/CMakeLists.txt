@@ -34,6 +34,9 @@ ${OPENFRAMEWORKS_ROOT}/libs/openFrameworks/video
 ${OPENFRAMEWORKS_ROOT}/libs/openFrameworks/communication
 ${OPENFRAMEWORKS_ROOT}/libs/openFrameworks/sound
 )
+if ( "${CMAKE_SYSTEM_NAME}" MATCHES "Linux" ) 
+  of_find_pkgconfig_lib(opencv)
+endif()
 include_directories(${OPENFRAMEWORKS_INCLUDES} ${ADDON_INCLUDES})
 add_library(${ADDON_NAME} SHARED ${ADDON_SRC})
 set_target_properties (${ADDON_NAME} 

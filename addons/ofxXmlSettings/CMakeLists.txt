@@ -21,7 +21,9 @@ message(STATUS "-------------------------------- Configuring OF Addon '${ADDON_N
 # this should work in most cases
 
 file( GLOB_RECURSE ADDON_SRC ${ADDON_ROOT}/src/*.cpp)
+file( GLOB_RECURSE TINYXML_SRC ${ADDON_ROOT}/libs/*.cpp)
 file( GLOB_RECURSE ADDON_HEADERS ${ADDON_ROOT}/src/*.h)
+file( GLOB_RECURSE TINYXML_HEADERS ${ADDON_ROOT}/libs/*.hpp)
 #########################################################################
 
 set(OPENFRAMEWORKS_INCLUDES ${OPENFRAMEWORKS_INCLUDES}
@@ -33,14 +35,17 @@ ${OPENFRAMEWORKS_ROOT}/libs/openFrameworks/app
 ${OPENFRAMEWORKS_ROOT}/libs/openFrameworks/video
 ${OPENFRAMEWORKS_ROOT}/libs/openFrameworks/communication
 ${OPENFRAMEWORKS_ROOT}/libs/openFrameworks/sound
+${ADDON_ROOT}/libs
 )
 include_directories(${OPENFRAMEWORKS_INCLUDES} ${ADDON_INCLUDES})
-add_library(${ADDON_NAME} SHARED ${ADDON_SRC})
+add_library(${ADDON_NAME} SHARED ${ADDON_SRC} ${TINYXML_SRC})
 set_target_properties (${ADDON_NAME} 
                         PROPERTIES OUTPUT_NAME ${ADDON_NAME} )
 target_link_libraries(${ADDON_NAME} ${ADDON_LIBRARIES})
 
 install(FILES ${ADDON_HEADERS}
+  DESTINATION include/openFrameworks/addons/${ADDON_NAME})
+install(FILES ${TINYXML_HEADERS}
   DESTINATION include/openFrameworks/addons/${ADDON_NAME})
 
 install(TARGETS ${ADDON_NAME} DESTINATION lib)
